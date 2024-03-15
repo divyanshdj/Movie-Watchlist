@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Movies</title>
+
+    <link rel="stylesheet" href="style.css" />
+
+    <script src="script.js"></script>
+  </head>
+
+  <body>
+
+    <div class="searchMovie">
+
+        <h3>Add Your Favorite Movie Here :</h3>
+        <input type="text" class="search" id="name" placeholder="Movie Name" />
+        <input type="number" class="search" id="year" placeholder="Release Year" />
+        <input
+          type="text"
+          class="search"
+          id="collection"
+          placeholder="Box Office Collection"
+        />
+        <button class="btn" onclick="addMovie()">Add</button>    
+        <h3>Search Your Movie Here :</h3>
+        
+    </div>
+    
+    <div class="search-wrapper">
+      <input
+        type="text"
+        class="search"
+        id="searchinput"
+        onkeyup="filterMovie()"
+      />
+      <!-- searchMovie() for Characters Only -->
+      <button onclick="searchMovie()">Search</button>
+    </div>
+
+    <div id="demo"></div>
+
+    <script>render(imdb);</script>
+
+  </body>
+</html>
