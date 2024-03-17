@@ -1,10 +1,17 @@
 
 imdb = [
-  { name: "Avengers", year: 2008, collection: "100mil" },
-  { name: "Thor", year: 2010, collection: "60mil" },
-  { name: "Hulk", year: 2012, collection: "70mil" },
-  { name: "C. America", year: 2009, collection: "90mil" },
-  { name: "Spiderman", year: 2020, collection: "140mil" },
+  { name: "Avatar", year: 2009, budget: "$237 million", collection: "$2.8 billion" },
+  { name: "The Avengers", year: 2012, budget: "$220 million", collection: "$1.52 billion" },
+  { name: "Frozen II", year: 2019, budget: "$150 million", collection: "$1.45 billion" },
+  { name: "The Dark Knight", year: 2008, budget: "$185 million", collection: "$1 billion" },
+  { name: "Inception", year: 2010, budget: "$160 million", collection: "$829.9 million" },
+  { name: "Interstellar", year: 2014, budget: "$165 million", collection: "$677.5 million" },
+  { name: "Black Panther", year: 2018, budget: "$200 million", collection: "$1.35 billion" },
+  { name: "Avengers: Infinity War", year: 2018, budget: "$356 million", collection: "$2.05 billion" },
+  { name: "Avengers: Endgame", year: 2019, budget: "$356 million", collection: "$2.798 billion" },
+  { name: "Spider-Man: Far From Home", year: 2019, budget: "$160 million", collection: "$1.13 billion" },
+  { name: "Frozen", year: 2013, budget: "$150 million", collection: "$1.28 billion" },
+  { name: "Beauty and the Beast", year: 2017, budget: "$160 million", collection: "$1.26 billion" },
 ];
 function render(source) {
   html = "";
