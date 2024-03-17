@@ -6,6 +6,7 @@
     font-family: "Poppins", sans-serif;
     font-style: normal;
     text-align: center;
+    transition: all 1s ease;
 }  
 
 .cards{
@@ -32,7 +33,7 @@
 }
 
 .search {
-  border-radius: 12px;
+  border-radius: 10px;
   font-size: 12px;
   border-color: rgb(33, 33, 33);
   background-color: rgb(255, 255, 255);
@@ -65,4 +66,55 @@ button:hover{
     align-items: center;
     flex-direction: column;
     gap: 10px;
+    animation: colorChange 3s linear infinite;
+}
+
+h3{
+  font-size: 2rem;
+}
+
+input{
+  padding: 5px 10px;
+}
+
+@keyframes colorChange {
+  0% {
+    color: black;
+  }
+  10% {
+    color: red;
+  }
+  20% {
+    color: blue;
+  }
+  30% {
+    color: green;
+  }
+  40% {
+    color: yellow;
+  }
+  50% {
+    color: orange;
+  }
+  60% {
+    color: purple;
+  }
+  70% {
+    color: cyan;
+  }
+  80% {
+    color: magenta;
+  }
+  90% {
+    color: navy;
+  }
+  100% {
+    color: bisque;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  h3{
+    font-size: 1rem; /* Adjust the font size as needed */
+  }
 }
