@@ -33,7 +33,7 @@ If you want to contact with me you can reach me at [Linkedin](https://www.linked
 
   # Movie Watchlist Manager
 
-  Summer Stride is a fully responsive ecommerce website, Responsive for all devices, build using HTML, CSS, and JavaScript.
+  "Movie-Watchlist" is a website framework designed for organizing and managing your movie collection. Simplify the process of adding and deleting movies from your watchlist with this customizable and user-friendly platform.
 
   Explore Here :   <a href="https://summer-stride-eshop.netlify.app/" target="_blank"><strong>➥ Live Demo</strong></a>
 
