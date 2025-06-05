@@ -21,6 +21,16 @@
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
   
   --transition: all 0.3s ease;
+
+  --alert-success-bg: #d4edda;
+  --alert-success-text: #155724;
+  --alert-error-bg: #f8d7da;
+  --alert-error-text: #721c24;
+  --alert-info-bg: #d1ecf1;
+  --alert-info-text: #0c5460;
+  --alert-success-bg-dark: #2e7d32;
+  --alert-error-bg-dark: #c62828;
+  --alert-info-bg-dark: #0277bd;
   
   /* Dark Theme */
   --dark-bg: #121212;
@@ -80,18 +90,20 @@ body {
 }
 
 .header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   text-align: center;
   margin-bottom: 20px;
+}
+
+.header-content .text-area{
+  text-align: left;
 }
 
 .header-content h1 {
   font-size: 2.5rem;
   color: var(--primary-color);
-  margin-bottom: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
 }
 
 .header-content .subtitle {
@@ -152,10 +164,15 @@ body {
   position: relative;
 }
 
-.search-container i {
+.search-container .fa-search {
   position: absolute;
   left: 15px;
+  top: 16px;
   color: var(--text-light);
+}
+
+.search-container .fa-times {
+  font-size: 1rem;
 }
 
 .search-container input {
@@ -304,15 +321,9 @@ body {
   color: var(--text-light);
 }
 
-.no-movies i {
-  font-size: 3rem;
-  margin-bottom: 15px;
-  color: var(--primary-color);
-  opacity: 0.5;
-}
-
 .no-movies p {
   font-size: 1.1rem;
+  margin: auto;
 }
 
 /* Movie Card */
@@ -338,6 +349,8 @@ body {
 }
 
 .movie-card-header h3 {
+  text-wrap: wrap;
+  width: 65%;
   font-size: 1.3rem;
   margin-bottom: 5px;
 }
@@ -354,7 +367,7 @@ body {
   background-color: rgba(0, 0, 0, 0.2);
   padding: 3px 8px;
   border-radius: 20px;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 
 .movie-card-body {
@@ -467,11 +480,15 @@ body {
 .btn.link {
   background: transparent;
   color: var(--primary-color);
-  padding: 5px 10px;
+  padding: 10px 10px;
+}
+
+.btn.link i {
+  font-size: 1.5rem;
 }
 
 .btn.link:hover {
-  text-decoration: underline;
+  background-color: rgba(67, 97, 238, 0.2);
 }
 
 /* Footer Styles */
@@ -554,6 +571,107 @@ body {
 
 .modal-content li {
   margin-bottom: 5px;
+}
+
+/* Alert Container */
+.alert {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 300px;
+  max-width: 600px;
+  padding: 15px 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  opacity: 0;
+  animation: fadeIn 0.3s ease forwards;
+  z-index: 1000;
+}
+
+/* Alert Types */
+.alert-success {
+  background-color: var(--alert-success-bg);
+  color: var(--alert-success-text);
+}
+
+.alert-error {
+  background-color: var(--alert-error-bg);
+  color: var(--alert-error-text);
+}
+
+.alert-info {
+  background-color: var(--alert-info-bg);
+  color: var(--alert-info-text);
+}
+
+/* Alert Message */
+.alert span {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* Close Button */
+.alert button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: inherit;
+  padding: 5px 10px;
+  transition: var(--transition);
+}
+
+.alert button:hover {
+  opacity: 0.7;
+}
+
+/* Dark Mode Styles */
+[data-theme="dark"] .alert-success {
+  background-color: var(--alert-success-bg-dark);
+  color: var(--text-dark-dark);
+}
+
+[data-theme="dark"] .alert-error {
+  background-color: var(--alert-error-bg-dark);
+  color: var(--text-dark-dark);
+}
+
+[data-theme="dark"] .alert-info {
+  background-color: var(--alert-info-bg-dark);
+  color: var(--text-dark-dark);
+}
+
+/* Fade Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+}
+
+/* Apply fadeOut when alert is removed */
+.alert.remove {
+  animation: fadeOut 0.3s ease forwards;
 }
 
 /* Responsive Design */

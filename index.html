@@ -24,7 +24,7 @@
             id="darkModeToggle"
             onclick="toggleDarkMode()"
           >
-            <i class="fas fa-moon"></i> Dark Mode
+            <i class="fas fa-moon"></i>
           </button>
         </div>
 
@@ -61,6 +61,9 @@
             <button class="btn secondary" onclick="clearSearch()">
               <i class="fas fa-times"></i> Clear
             </button>
+            <a class="btn secondary" style="text-decoration: none" href="#addMovieForm">
+              <i class="fas fa-add"></i> Add Movie
+            </a>
           </div>
           <div class="filter-container">
             <select
@@ -78,7 +81,29 @@
           </div>
         </section>
 
-        <section class="form-section">
+        <section class="movie-section">
+          <div class="section-header">
+            <h2><i class="fas fa-list-ul"></i> Your Movie Collection</h2>
+            <div class="actions">
+              <button class="btn secondary" onclick="exportMovies()">
+                <i class="fas fa-file-export"></i> Export
+              </button>
+              <button class="btn danger" onclick="confirmClearAll()">
+                <i class="fas fa-trash-alt"></i> Clear All
+              </button>
+            </div>
+          </div>
+
+          <div id="movieContainer" class="movie-container">
+            <!-- Movies will be rendered here -->
+          </div>
+
+          <div id="noMoviesMessage" class="no-movies">
+            <p>Your collection is empty. Add your first movie!</p>
+          </div>
+        </section>
+
+        <section class="form-section" id="addMovieForm">
           <h2><i class="fas fa-plus-circle"></i> Add New Movie</h2>
           <div class="form-grid">
             <div class="form-group">
@@ -167,29 +192,6 @@
             </button>
           </div>
         </section>
-
-        <section class="movie-section">
-          <div class="section-header">
-            <h2><i class="fas fa-list-ul"></i> Your Movie Collection</h2>
-            <div class="actions">
-              <button class="btn secondary" onclick="exportMovies()">
-                <i class="fas fa-file-export"></i> Export
-              </button>
-              <button class="btn danger" onclick="confirmClearAll()">
-                <i class="fas fa-trash-alt"></i> Clear All
-              </button>
-            </div>
-          </div>
-
-          <div id="movieContainer" class="movie-container">
-            <!-- Movies will be rendered here -->
-          </div>
-
-          <div id="noMoviesMessage" class="no-movies">
-            <i class="fas fa-film"></i>
-            <p>Your collection is empty. Add your first movie!</p>
-          </div>
-        </section>
       </main>
 
       <footer class="app-footer">
@@ -207,7 +209,7 @@
               id="darkModeToggle"
               onclick="toggleDarkMode()"
             >
-              <i class="fas fa-moon"></i> Dark Mode
+              <i class="fas fa-moon"></i>
             </button>
           </div>
         </div>

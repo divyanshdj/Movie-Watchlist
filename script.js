@@ -24,11 +24,21 @@ function loadMovies() {
   } else {
     // Load default movies if no saved data
     movies = [
-      { name: "Avatar", year: 2009, collection: "$2.8 billion", rating: "⭐⭐⭐⭐", genre: "Sci-Fi", notes: "Groundbreaking visuals" },
-      { name: "The Avengers", year: 2012, collection: "$1.52 billion", rating: "⭐⭐⭐⭐⭐", genre: "Action", notes: "Perfect superhero team-up" },
-      { name: "The Dark Knight", year: 2008, collection: "$1 billion", rating: "⭐⭐⭐⭐⭐", genre: "Action", notes: "Heath Ledger's iconic Joker" },
-      { name: "Inception", year: 2010, collection: "$829.9 million", rating: "⭐⭐⭐⭐", genre: "Sci-Fi", notes: "Mind-bending plot" },
-      { name: "Interstellar", year: 2014, collection: "$677.5 million", rating: "⭐⭐⭐⭐", genre: "Sci-Fi", notes: "Emotional space journey" }
+  { name: "Avatar", year: 2009, collection: "$2.8 billion", rating: "⭐⭐⭐⭐", genre: "Sci-Fi", notes: "Groundbreaking visuals" },
+  { name: "The Avengers", year: 2012, collection: "$1.52 billion", rating: "⭐⭐⭐⭐⭐", genre: "Action", notes: "Perfect superhero team-up" },
+  { name: "The Dark Knight", year: 2008, collection: "$1 billion", rating: "⭐⭐⭐⭐⭐", genre: "Action", notes: "Heath Ledger's iconic Joker" },
+  { name: "Inception", year: 2010, collection: "$829.9 million", rating: "⭐⭐⭐⭐", genre: "Sci-Fi", notes: "Mind-bending plot" },
+  { name: "Interstellar", year: 2014, collection: "$677.5 million", rating: "⭐⭐⭐⭐", genre: "Sci-Fi", notes: "Emotional space journey" },
+  { name: "Oppenheimer", year: 2023, collection: "$960 million", rating: "⭐⭐⭐⭐⭐", genre: "Biography", notes: "Nolan's historical masterpiece" },
+  { name: "Barbie", year: 2023, collection: "$1.44 billion", rating: "⭐⭐⭐⭐", genre: "Comedy/Fantasy", notes: "A cultural phenomenon" },
+  { name: "Spider-Man: No Way Home", year: 2021, collection: "$1.91 billion", rating: "⭐⭐⭐⭐⭐", genre: "Action", notes: "Multiverse epic with nostalgia" },
+  { name: "Top Gun: Maverick", year: 2022, collection: "$1.5 billion", rating: "⭐⭐⭐⭐⭐", genre: "Action/Drama", notes: "Tom Cruise’s stunning return" },
+  { name: "Dune: Part Two", year: 2024, collection: "TBD", rating: "⭐⭐⭐⭐", genre: "Sci-Fi", notes: "Visually rich continuation" },
+  { name: "Everything Everywhere All at Once", year: 2022, collection: "$143 million", rating: "⭐⭐⭐⭐⭐", genre: "Sci-Fi/Drama", notes: "Oscar-winning multiverse tale" },
+  { name: "Joker", year: 2019, collection: "$1.07 billion", rating: "⭐⭐⭐⭐", genre: "Drama/Thriller", notes: "Gritty origin of a villain" },
+  { name: "Frozen II", year: 2019, collection: "$1.45 billion", rating: "⭐⭐⭐⭐", genre: "Animation", notes: "Disney’s magical sequel" },
+  { name: "Black Panther: Wakanda Forever", year: 2022, collection: "$859 million", rating: "⭐⭐⭐⭐", genre: "Action", notes: "Tribute to Chadwick Boseman" },
+  { name: "The Batman", year: 2022, collection: "$772 million", rating: "⭐⭐⭐⭐", genre: "Action/Detective", notes: "Dark and gritty reboot" }
     ];
     saveMovies();
   }
@@ -257,7 +267,7 @@ function updateStats() {
     getCollectionValue(current) > getCollectionValue(highest) ? current : highest
   );
   
-  highestGrossingEl.textContent = highestGrossing.name.split(' ')[0]; // Just show first word
+  highestGrossingEl.textContent = highestGrossing.name; // Just show first word
 }
 
 // Clear form inputs
@@ -276,18 +286,65 @@ function exportMovies() {
     showAlert('No movies to export!', 'error');
     return;
   }
-  
-  const dataStr = JSON.stringify(movies, null, 2);
-  const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
-  
-  const exportName = 'movieverse-collection-' + new Date().toISOString().slice(0, 10) + '.json';
-  
-  const linkElement = document.createElement('a');
-  linkElement.setAttribute('href', dataUri);
-  linkElement.setAttribute('download', exportName);
-  linkElement.click();
-  
-  showAlert('Collection exported successfully!', 'success');
+
+  const dateStr = new Date().toISOString().slice(0, 10);
+  const exportName = `movieverse-collection-${dateStr}.html`;
+
+  let tableRows = movies.map(movie => `
+    <tr>
+      <td>${movie.name}</td>
+      <td>${movie.genre || 'N/A'}</td>
+      <td>${movie.rating || 'N/A'}</td>
+      <td>${movie.year}</td>
+    </tr>
+  `).join('');
+
+  const htmlContent = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MovieVerse Collection - ${dateStr}</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; }
+    h1 { text-align: center; color: #333; }
+    table { width: 100%; border-collapse: collapse; background: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+    th { background-color: #333; color: white; }
+    tr:nth-child(even) { background-color: #f9f9f9; }
+  </style>
+</head>
+<body>
+  <h1>🎬 MovieVerse Collection - ${dateStr}</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Genre</th>
+        <th>Rating</th>
+        <th>Release Year</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${tableRows}
+    </tbody>
+  </table>
+</body>
+</html>
+`;
+
+  const blob = new Blob([htmlContent], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = exportName;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  showAlert('Movies exported as HTML file!', 'success');
 }
 
 // Show alert message
@@ -303,7 +360,7 @@ function showAlert(message, type) {
   
   setTimeout(() => {
     alert.remove();
-  }, 5000);
+  }, 3000);
 }
 
 // Modal functions
@@ -324,11 +381,11 @@ function toggleDarkMode() {
   if (currentTheme === 'dark') {
     root.removeAttribute('data-theme');
     localStorage.setItem('movieverse-theme', 'light');
-    toggleBtn.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+    toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
   } else {
     root.setAttribute('data-theme', 'dark');
     localStorage.setItem('movieverse-theme', 'dark');
-    toggleBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+    toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
   }
 }
 
@@ -341,10 +398,10 @@ function checkDarkModePreference() {
 
   if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
     root.setAttribute('data-theme', 'dark');
-    toggleBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+    toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
   } else {
     root.removeAttribute('data-theme');
-    toggleBtn.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+    toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
   }
 }
 
