@@ -1,8 +1,8 @@
-<div align="center">
-  ![GitHub repo size](https://img.shields.io/github/repo-size/divyanshdj/MovieVerse)
-  ![GitHub language count](https://img.shields.io/github/languages/count/divyanshdj/MovieVerse)
-  ![GitHub stars](https://img.shields.io/github/stars/divyanshdj/MovieVerse?style=social)
-</div>
+<p align="center">
+  <img src="https://img.shields.io/github/repo-size/divyanshdj/MovieVerse" alt="Repo Size" />
+  <img src="https://img.shields.io/github/languages/count/divyanshdj/MovieVerse" alt="Language Count" />
+  <img src="https://img.shields.io/github/stars/divyanshdj/MovieVerse?style=social" alt="Stars" />
+</p>
 
 # MovieVerse - Movie Watchlist Manager
 
