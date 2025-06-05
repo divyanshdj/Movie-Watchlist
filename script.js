@@ -1,5 +1,4 @@
-
-imdb = [
+const imdb = [
   { name: "Avatar", year: 2009, budget: "$237 million", collection: "$2.8 billion" },
   { name: "The Avengers", year: 2012, budget: "$220 million", collection: "$1.52 billion" },
   { name: "Frozen II", year: 2019, budget: "$150 million", collection: "$1.45 billion" },
@@ -13,69 +12,67 @@ imdb = [
   { name: "Frozen", year: 2013, budget: "$150 million", collection: "$1.28 billion" },
   { name: "Beauty and the Beast", year: 2017, budget: "$160 million", collection: "$1.26 billion" },
 ];
-function render(source) {
-  html = "";
-  for (i = 0; i < source.length; i++) {
-    html += `<div class='cards'>
-          <div class='title'>${source[i].name}</div>
-          <div class='year'>${source[i].year}</div>
-          <div class='collection'>${source[i].collection}</div>
-          <div>
-              <button class='btn' onclick='deleteMovie(${i})'>Delete</button>
-          </div>
-      </div>`;
-  }
-  demoObj = document.getElementById("demo");
-  demoObj.innerHTML = html;
-}
 
-function filterMovie() {
-  searchObj = document.getElementById("searchip");
-  searchString = searchObj.value.toLowerCase();
-  res = imdb.filter((movie) => {
-    sourceString = Object.values(movie).join("").toLowerCase();
-    const res = searchString
-      .split("")
-      .filter((char) => sourceString.includes(char));
-    return res.length == searchString.length;
+function renderMovies(movieList) {
+  const container = document.getElementById("movieContainer");
+  container.innerHTML = "";
+
+  if (movieList.length === 0) {
+    container.innerHTML = "<p>No movies found. Try adding one!</p>";
+    return;
+  }
+
+  movieList.forEach((movie, index) => {
+    const card = document.createElement("div");
+    card.className = "movie-card";
+
+    card.innerHTML = `
+      <h3>${movie.name}</h3>
+      <p><strong>Year:</strong> ${movie.year}</p>
+      <p><strong>Collection:</strong> ${movie.collection}</p>
+      <button class="btn danger" onclick="deleteMovie(${index})">🗑 Delete</button>
+    `;
+
+    container.appendChild(card);
   });
-  render(res);
 }
 
+function addMovie() {
+  const name = document.getElementById("nameInput").value.trim();
+  const year = document.getElementById("yearInput").value.trim();
+  const collection = document.getElementById("collectionInput").value.trim();
 
-function searchMovie() {
-  searchOutput = [];
-  searchObj = document.getElementById("searchinput");
+  if (!name || !year || !collection) {
+    alert("Please fill all fields!");
+    return;
+  }
 
-  for (i = 0; i < imdb.length; i++) {
-    if (imdb[i].name.toLowerCase().includes(searchObj.value.toLowerCase())) {
-      searchOutput.push(imdb[i]);
-    }
-  }
-  console.log("Matched Result = ", searchOutput);
-  if (searchObj.value.length == 0) {
-    searchOutput = imdb;
-  }
-  render(searchOutput);
+  imdb.push({ name, year, collection });
+  clearFormInputs();
+  renderMovies(imdb);
 }
-
 
 function deleteMovie(index) {
-  imdb.splice(index, 1);
-  render(imdb);
+  if (confirm(`Are you sure you want to delete "${imdb[index].name}"?`)) {
+    imdb.splice(index, 1);
+    renderMovies(imdb);
+  }
 }
-function addMovie() {
-  nameObj = document.getElementById("name");
-  yearObj = document.getElementById("year");
-  collectionObj = document.getElementById("collection");
 
-  movieObj = {
-    name: nameObj.value,
-    year: yearObj.value,
-    collection: collectionObj.value,
-  };
-
-  imdb.push(movieObj);
-  render(imdb);
-  console.log("IMDB Data = ", imdb);
+function searchMovie() {
+  const query = document.getElementById("searchInput").value.toLowerCase().trim();
+  const filtered = imdb.filter(movie =>
+    movie.name.toLowerCase().includes(query)
+  );
+  renderMovies(filtered);
 }
+
+function clearFormInputs() {
+  document.getElementById("nameInput").value = "";
+  document.getElementById("yearInput").value = "";
+  document.getElementById("collectionInput").value = "";
+}
+
+window.onload = () => {
+  renderMovies(imdb);
+};
