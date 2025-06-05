@@ -1,35 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MovieVerse</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MovieVerse</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="./favicon-movie.png" type="image/x-icon" />
+  </head>
+  <body>
+    <div class="app-container">
+      <header class="app-header">
+        <div class="header-content">
+          <div class="text-area">
+            <h1><i class="fas fa-film"></i> MovieVerse</h1>
+            <p class="subtitle">Your personal movie collection manager</p>
+          </div>
+          <button
+            class="btn link"
+            id="darkModeToggle"
+            onclick="toggleDarkMode()"
+          >
+            <i class="fas fa-moon"></i> Dark Mode
+          </button>
+        </div>
 
-  <header>
-    <h1>🎬 MovieVerse</h1>
-    <p>Track, search, and add your favorite blockbuster movies</p>
-  </header>
+        <div class="stats-container">
+          <div class="stat-card">
+            <i class="fas fa-database"></i>
+            <span id="totalMovies">0</span>
+            <small>Movies</small>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-calendar-alt"></i>
+            <span id="oldestYear">-</span>
+            <small>Oldest</small>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-trophy"></i>
+            <span id="highestGrossing">-</span>
+            <small>Top Gross</small>
+          </div>
+        </div>
+      </header>
 
-  <section class="search-section">
-    <input type="text" id="searchInput" placeholder="🔍 Search movie by name..." oninput="searchMovie()" />
-  </section>
+      <main class="app-main">
+        <section class="search-section">
+          <div class="search-container">
+            <i class="fas fa-search"></i>
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search movies by name, year..."
+              aria-label="Search movies"
+              oninput="searchMovie()"
+            />
+            <button class="btn secondary" onclick="clearSearch()">
+              <i class="fas fa-times"></i> Clear
+            </button>
+          </div>
+          <div class="filter-container">
+            <select
+              id="sortSelect"
+              onchange="sortMovies()"
+              aria-label="Sort movies"
+            >
+              <option value="name-asc">Sort by: Name (A-Z)</option>
+              <option value="name-desc">Name (Z-A)</option>
+              <option value="year-asc">Year (Oldest)</option>
+              <option value="year-desc">Year (Newest)</option>
+              <option value="collection-desc">Collection (High-Low)</option>
+              <option value="collection-asc">Collection (Low-High)</option>
+            </select>
+          </div>
+        </section>
 
-  <section class="form-section">
-    <input type="text" id="nameInput" placeholder="Movie Name" />
-    <input type="number" id="yearInput" placeholder="Release Year" />
-    <input type="text" id="collectionInput" placeholder="Box Office Collection" />
-    <button class="btn primary" onclick="addMovie()">➕ Add Movie</button>
-  </section>
+        <section class="form-section">
+          <h2><i class="fas fa-plus-circle"></i> Add New Movie</h2>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="nameInput"
+                ><i class="fas fa-tag"></i> Movie Title</label
+              >
+              <input
+                type="text"
+                id="nameInput"
+                placeholder="e.g. The Shawshank Redemption"
+              />
+            </div>
+            <div class="form-group">
+              <label for="yearInput"
+                ><i class="fas fa-calendar"></i> Release Year</label
+              >
+              <input
+                type="number"
+                id="yearInput"
+                placeholder="e.g. 1994"
+                min="1900"
+                max="2099"
+              />
+            </div>
+            <div class="form-group">
+              <label for="collectionInput"
+                ><i class="fas fa-money-bill-wave"></i> Box Office</label
+              >
+              <input
+                type="text"
+                id="collectionInput"
+                placeholder="e.g. $28.34 million"
+              />
+            </div>
+            <div class="form-group">
+              <label for="ratingInput"
+                ><i class="fas fa-star"></i> Your Rating</label
+              >
+              <select id="ratingInput">
+                <option value="">Not rated</option>
+                <option value="⭐">⭐</option>
+                <option value="⭐⭐">⭐⭐</option>
+                <option value="⭐⭐⭐">⭐⭐⭐</option>
+                <option value="⭐⭐⭐⭐">⭐⭐⭐⭐</option>
+                <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="genreInput"
+                ><i class="fas fa-theater-masks"></i> Genre</label
+              >
+              <select id="genreInput">
+                <option value="">Select genre</option>
+                <option value="Action">Action</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Animation">Animation</option>
+                <option value="Comedy">Comedy</option>
+                <option value="Crime">Crime</option>
+                <option value="Documentary">Documentary</option>
+                <option value="Drama">Drama</option>
+                <option value="Fantasy">Fantasy</option>
+                <option value="Horror">Horror</option>
+                <option value="Mystery">Mystery</option>
+                <option value="Romance">Romance</option>
+                <option value="Sci-Fi">Sci-Fi</option>
+                <option value="Thriller">Thriller</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="notesInput"
+                ><i class="fas fa-sticky-note"></i> Notes</label
+              >
+              <input
+                type="text"
+                id="notesInput"
+                placeholder="Any additional notes..."
+              />
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn primary" onclick="addMovie()">
+              <i class="fas fa-plus"></i> Add Movie
+            </button>
+            <button class="btn secondary" onclick="clearFormInputs()">
+              <i class="fas fa-eraser"></i> Clear Form
+            </button>
+          </div>
+        </section>
 
-  <section id="movieContainer" class="movie-container"></section>
+        <section class="movie-section">
+          <div class="section-header">
+            <h2><i class="fas fa-list-ul"></i> Your Movie Collection</h2>
+            <div class="actions">
+              <button class="btn secondary" onclick="exportMovies()">
+                <i class="fas fa-file-export"></i> Export
+              </button>
+              <button class="btn danger" onclick="confirmClearAll()">
+                <i class="fas fa-trash-alt"></i> Clear All
+              </button>
+            </div>
+          </div>
 
-  <footer>
-    <p>Made with ❤️ by Divyansh | MovieVerse &copy; 2025</p>
-  </footer>
+          <div id="movieContainer" class="movie-container">
+            <!-- Movies will be rendered here -->
+          </div>
 
-  <script src="script.js"></script>
-</body>
+          <div id="noMoviesMessage" class="no-movies">
+            <i class="fas fa-film"></i>
+            <p>Your collection is empty. Add your first movie!</p>
+          </div>
+        </section>
+      </main>
+
+      <footer class="app-footer">
+        <div class="footer-content">
+          <p>
+            Made with <i class="fas fa-heart"></i> by Divyansh |
+            <i class="fas fa-copyright"></i> MovieVerse 2025
+          </p>
+          <div class="footer-links">
+            <button class="btn link" onclick="showAbout()">
+              <i class="fas fa-info-circle"></i> About
+            </button>
+            <button
+              class="btn link"
+              id="darkModeToggle"
+              onclick="toggleDarkMode()"
+            >
+              <i class="fas fa-moon"></i> Dark Mode
+            </button>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="aboutModal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <h3><i class="fas fa-info-circle"></i> About MovieVerse</h3>
+        <p>
+          MovieVerse is a personal movie collection manager that helps you track
+          your favorite films.
+        </p>
+        <p>Version: 2.0.0</p>
+        <p>Features:</p>
+        <ul>
+          <li>Add, edit, and delete movies</li>
+          <li>Search and filter your collection</li>
+          <li>Data persists in browser storage</li>
+          <li>Responsive design for all devices</li>
+          <li>Dark mode support</li>
+        </ul>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
 </html>
